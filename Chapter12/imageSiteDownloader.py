@@ -8,6 +8,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.keys import Keys
 import requests, os, bs4, sys
+import time
 from selenium.common.exceptions import NoSuchElementException
 
 
@@ -25,11 +26,12 @@ else:
     # Find the bottom of the page.
     while True:
         htmlElem.send_keys(Keys.END)
-
+        time.sleep(0.5)
         # If it finds a 'Load More' button, click it.
         try:
             browser.find_element(By.ID, 'load-more')
             WebDriverWait(browser, 10).until(EC.element_to_be_clickable((By.ID, "load-more"))).click()
+            time.sleep(0.5)
         except NoSuchElementException as e:
             print("Not found")
         
